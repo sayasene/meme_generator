@@ -1,0 +1,1 @@
+Meme Generator created as part of Rithm School Prework Curriculum.
