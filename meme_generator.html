@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEET UR MEME: Quick Meme Generation</title>
+    <link rel="stylesheet" href="MemeGen_stylesheet.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- font imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Chango&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 id="titleHeader">
+    ~MEET UR MEME~
+    </h1>
+    <h5 id="subHeader">Quick, simple, instant meme generation.</h5>
+    <div id="formDiv">
+    <form onsubmit="postImage();" id="inputForm"> 
+        <input type="text" id="imagelink" placeholder="Insert link to an image">
+            <br>
+        <input type="text" id="upperText" placeholder="Insert upper text of meme">
+            <br>
+        <input type="text" id="lowerText" placeholder="Insert lower text of meme">
+            <br>
+            <br>
+        <button id="generate" type="submit">Press me!</button>
+    </form>
+    </div> 
+    <br>
+    <footer id="footerID">Built for Rithm by <a href="https://sayasene.github.io/">Mitchell Sayasene.</a></footer>
+        <br>
+        <div id="memeZone"></div>
+        
+    
+    <script>
+        function postImage(){
+            //declarations for overall meme+text container, image, text containers, removal features
+            let memeDiv=document.createElement('div');
+            memeDiv.id='memeDivID';
+
+            let picture=document.createElement('img');
+            picture.id='pictureID';
+
+            let upperTextDiv=document.createElement('div');
+            upperTextDiv.id='upperTextID';
+
+            let lowerTextDiv=document.createElement('div');
+            lowerTextDiv.id='lowerTextID';
+
+            //deletion features
+            let overlayRemove=document.createElement('button');
+            overlayRemove.id='overlayID'
+            overlayRemove.textContent="X";
+            
+            //access to the existing highest level container will be needed for remove child method for removal features
+            let overallContainer=document.getElementById('memeZone');
+
+
+            //image insertion
+            let linkToImage=document.getElementById('imagelink').value;
+            picture.src=linkToImage;
+            memeDiv.appendChild(picture);
+            event.preventDefault();
+
+            //upper text insertion
+            upperTextDiv.textContent=document.getElementById('upperText').value.toUpperCase();
+            memeDiv.append(upperTextDiv);
+
+            //lower text insertion
+            lowerTextDiv.textContent=document.getElementById('lowerText').value.toUpperCase();
+            memeDiv.append(lowerTextDiv);
+
+            //removal button insertion, checks for click event on button
+            memeDiv.append(overlayRemove);
+            overlayRemove.addEventListener('click',function(){
+                overallContainer.removeChild(memeDiv)})
+            
+            //appends the meme+text container (with the other newly declared elements appended) created earlier in this function to the existing container in the original HTML
+            document.getElementById('memeZone').appendChild(memeDiv);
+            event.preventDefault();
+            
+            //clears form
+            document.getElementById('inputForm').reset();
+        }
+    </script>
+</body>
+</html>
